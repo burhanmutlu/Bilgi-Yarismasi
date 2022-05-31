@@ -1,0 +1,16 @@
+﻿<Window x:Class="BilgiYarismasi.Views.Exit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BilgiYarismasi.Views"
+        mc:Ignorable="d"
+        Title="Exit" Height="205.319" Width="275.532" ResizeMode="NoResize" Background="#FFDAC8C8">
+
+    <Grid Background="#FFF3EEEE">
+        <Label Content="Emin misin?" FontSize="30" Margin="50,10,36,114"/>
+        <Button x:Name="button" Content="Hayır" HorizontalAlignment="Left" Margin="147,112,0,0" VerticalAlignment="Top" Width="75" Click="Btn_Geri"/>
+        <Button x:Name="button1" Content="Evet" HorizontalAlignment="Left" Margin="51,112,0,0" VerticalAlignment="Top" Width="75" Click="Btn_Cik"/>
+
+    </Grid>
+</Window>

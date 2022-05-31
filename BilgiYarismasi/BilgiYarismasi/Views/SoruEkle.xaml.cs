@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Data.SqlClient;
+using System.Data;
+
+namespace BilgiYarismasi.Views
+{
+    /// <summary>
+    /// Interaction logic for SoruEkle.xaml
+    /// </summary>
+    public partial class SoruEkle : Page
+    {
+        public SoruEkle()
+        {
+            InitializeComponent();
+        }
+
+        private void TextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            txt1.Text = "Soru Ekle";
+            txt2.Text = "A Şıkkı";
+            txt3.Text = "B Şıkkı";
+            txt4.Text = "C Şıkkı";
+            txt5.Text = "D Şıkkı";
+            txt1.FontSize = 25;
+            txt2.FontSize = 15;
+            txt3.FontSize = 15;
+            txt4.FontSize = 15;
+            txt5.FontSize = 15;
+        }
+        bool[] durum = { true, true, true, true, true };
+
+        private void txt1_KeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox txtislem = sender as TextBox;
+            
+            if (txtislem != null)
+            {
+                decimal deger = Convert.ToDecimal(txtislem.Tag);
+                if (deger == 0)
+                {
+                    if (durum[0])
+                    {
+                        txt1.Clear();
+                        durum[0] = false;
+                    }
+                }
+                else if (deger == 1)
+                {
+                    if (durum[1])
+                    {
+                        txt2.Clear();
+                        durum[1] = false;
+                    }
+                }
+                else if (deger == 2)
+                {
+                    if (durum[2])
+                    {
+                        txt3.Clear();
+                        durum[2] = false;
+                    }
+                }
+                else if (deger == 3)
+                {
+                    if (durum[3])
+                    {
+                        txt4.Clear();
+                        durum[3] = false;
+                    }
+                }
+                else if (deger == 4)
+                {
+                    if (durum[4])
+                    {
+                        txt5.Clear();
+                        durum[4] = false;
+                    }
+                }
+            }
+            
+        }
+
+        private void Btn_Kaydet(object sender, RoutedEventArgs e)
+        {
+            Question q = new Question();
+            q.Soru = txt1.Text;
+            q.secenekA = txt2.Text;
+            q.secenekB = txt3.Text;
+            q.secenekC = txt4.Text;
+            q.secenekD = txt5.Text;
+
+            SqlConnection baglanti = new SqlConnection("Data Source = BURHACK; Initial Catalog = BilgiYarismasiDb; Integrated Security = True");
+            SqlCommand komut = new SqlCommand();
+            SqlDataAdapter adaptor = new SqlDataAdapter();
+
+            DataSet ds = new DataSet();
+            if ((baglanti.State == ConnectionState.Closed)) baglanti.Open();
+            komut = new SqlCommand("insert into Sorular (soru, seceneka, secenekb, secenekc, secenekd)values ('" + q.Soru + "', '" + q.secenekA + "', '" + q.secenekB + "', '" + q.secenekC + "', '" + q.secenekD + "')", baglanti);
+            SqlDataReader reader = komut.ExecuteReader();
+            reader.Read();
+
+        }
+
+        private void Btn_Kapat(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       
+    }
+}
